@@ -40,3 +40,14 @@ class LoginView(APIView):
         }, settings.SECRET_KEY)
         return Response({'token': token, 'message': f'Welcome back {user.username}'})
 
+# class ProfileView(APIView):
+
+#     def get_user(self, email):
+#         try:
+#             return User.objects.get(email=email)
+#         except User.DoesNotExist:
+#             raise PermissionDenied()
+
+#     def get(self, _request, pk):
+#         user = self.get_user()
+

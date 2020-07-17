@@ -1,13 +1,14 @@
 from datetime import datetime, timedelta
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import PermissionDenied, NotFound
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework import status
 from django.contrib.auth import get_user_model
 from django.conf import settings
 import jwt
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UpdateUserSerializer
 User = get_user_model()
 
 class RegisterView(APIView):
@@ -40,14 +41,53 @@ class LoginView(APIView):
         }, settings.SECRET_KEY)
         return Response({'token': token, 'message': f'Welcome back {user.username}'})
 
-# class ProfileView(APIView):
 
-#     def get_user(self, email):
-#         try:
-#             return User.objects.get(email=email)
-#         except User.DoesNotExist:
-#             raise PermissionDenied()
+class ProfileListView(APIView):
 
-#     def get(self, _request, pk):
-#         user = self.get_user()
+    # * Can only access if logged in
+    permission_classes = (IsAuthenticated, )
 
+    # * Get all users
+    def get(self, request):
+        users = User.objects.all()
+        serialized_users = UserSerializer(users, many=True)
+        return Response(serialized_users.data, status=status.HTTP_200_OK)
+
+
+        
+class MyProfileView(APIView):
+
+    # * Can only access if logged in
+    permission_classes = (IsAuthenticated, )
+
+
+    # * Checks if user is legit
+    def get_user(self, username):
+        try:
+            return User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise NotFound()
+
+    # ! Will need to update all below later with serialized events/workouts/groups etc... --------
+
+    # * Gets current user profile
+    def get(self, request):
+        user = self.get_user(username=request.user.username)
+        serialized_user = UserSerializer(user)
+        return Response(serialized_user.data)
+
+    # * Updates current user
+    def put(self, request):
+        user_to_update = self.get_user(username=request.user.username)
+        updated_user = UpdateUserSerializer(user_to_update, data=request.data, context={'request': 'update'})
+        if updated_user.is_valid():
+            updated_user.save()
+            return Response(updated_user.data, status=status.HTTP_202_ACCEPTED)
+        return Response(updated_user.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+
+
+    # * Deletes current user
+    def delete(self, request):
+        user_to_delete = self.get_user(username= request.user.username)
+        user_to_delete.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

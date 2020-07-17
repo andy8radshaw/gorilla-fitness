@@ -1,6 +1,6 @@
 {
   "python.pythonPath": "/Users/andy/.local/share/virtualenvs/gorilla-fitness-0PN4Bf2w/bin/python",
-  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorTheme": "Dracula Soft",
   "workbench.colorCustomizations": {
     "statusBar.background": "#2c4ef8",
     "titleBar.activeBackground": "#2c4ef8",

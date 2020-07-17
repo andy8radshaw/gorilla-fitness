@@ -91,3 +91,22 @@ class MyProfileView(APIView):
         user_to_delete = self.get_user(username= request.user.username)
         user_to_delete.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ProfileDetailView(APIView):
+
+    # * Can only access if logged in
+    permission_classes = (IsAuthenticated, )
+
+    # * Checks if user is legit
+    def get_user(self, username):
+        try:
+            return User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise NotFound()
+
+    # * Gets a selected user
+    def get(self, _request, username):
+        user = self.get_user(username)
+        serialized_user = UserSerializer(user)
+        return Response(serialized_user.data, status=status.HTTP_200_OK)

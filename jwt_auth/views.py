@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 import jwt
 
-from .serializers import UserSerializer, UpdateUserSerializer
+from .serializers import UserSerializer, UpdateUserSerializer, PopulatedUserSerializer
 User = get_user_model()
 
 class RegisterView(APIView):
@@ -73,7 +73,7 @@ class MyProfileView(APIView):
     # * Gets current user profile
     def get(self, request):
         user = self.get_user(username=request.user.username)
-        serialized_user = UserSerializer(user)
+        serialized_user = PopulatedUserSerializer(user)
         return Response(serialized_user.data)
 
     # * Updates current user

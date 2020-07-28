@@ -4,9 +4,9 @@ from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from django.apps import apps 
 
-from workout_groups.serializers import WorkoutGroupSerializer
 
 User = get_user_model()
+WorkoutGroup = apps.get_model('workout_groups', 'WorkoutGroup')
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -35,6 +35,13 @@ class UpdateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         exclude = ('password', )
+
+class WorkoutGroupSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = WorkoutGroup
+        fields = ('id', 'name')
+
 
 
 class PopulatedUserSerializer(UserSerializer):

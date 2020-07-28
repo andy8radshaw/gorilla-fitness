@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'jwt_auth',
     'workout_groups',
+    'events',
 ]
 
 MIDDLEWARE = [

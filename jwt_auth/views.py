@@ -79,6 +79,7 @@ class MyProfileView(APIView):
     # * Updates current user
     def put(self, request):
         user_to_update = self.get_user(username=request.user.username)
+        request.data['is_admin'] = request.user.is_admin
         updated_user = UpdateUserSerializer(user_to_update, data=request.data, context={'request': 'update'})
         if updated_user.is_valid():
             updated_user.save()
@@ -108,5 +109,5 @@ class ProfileDetailView(APIView):
     # * Gets a selected user
     def get(self, _request, username):
         user = self.get_user(username)
-        serialized_user = UserSerializer(user)
+        serialized_user = PopulatedUserSerializer(user)
         return Response(serialized_user.data, status=status.HTTP_200_OK)

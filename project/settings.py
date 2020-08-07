@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'jwt_auth',
     'workout_groups',
     'events',
+    'comments',
 ]
 
 MIDDLEWARE = [

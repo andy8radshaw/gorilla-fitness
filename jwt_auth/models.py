@@ -7,4 +7,4 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=50)
     profile_image = models.CharField(max_length=300, blank=True)
     bio = models.CharField(max_length=500, blank=True)
-    is_admin = models.BooleanField()
+    is_admin = models.BooleanField(null=True)

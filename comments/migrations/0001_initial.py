@@ -12,13 +12,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Event',
+            name='Comment',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
-                ('description', models.CharField(blank=True, max_length=300)),
-                ('location', models.CharField(max_length=50)),
-                ('date', models.DateTimeField()),
+                ('text', models.CharField(max_length=300)),
             ],
         ),
     ]

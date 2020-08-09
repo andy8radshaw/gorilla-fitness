@@ -23,14 +23,15 @@ class WorkoutGroupListView(APIView):
 
     # * Creates a new workout group
     def post(self, request):
-        if request.user.is_admin:
-            request.data['owner'] = request.user.id
-            new_workout_group = WorkoutGroupSerializer(data=request.data)
-            if new_workout_group.is_valid():
-                new_workout_group.save()
-                return Response(new_workout_group.data, status=status.HTTP_201_CREATED)
-            return Response(new_workout_group.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
-        return Response({"message": "Unauthorized"}, status=status.HTTP_401_UNAUTHORIZED)
+        if not request.user.is_admin:
+            raise PermissionDenied()
+        request.data['owner'] = request.user.id
+        request.data['members'] = [request.user.id]
+        new_workout_group = WorkoutGroupSerializer(data=request.data)
+        if new_workout_group.is_valid():
+            new_workout_group.save()
+            return Response(new_workout_group.data, status=status.HTTP_201_CREATED)
+        return Response(new_workout_group.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 class WorkoutGroupDetailView(APIView):
 

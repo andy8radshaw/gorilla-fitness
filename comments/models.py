@@ -5,6 +5,7 @@ User = get_user_model()
 
 class Comment(models.Model):
     text = models.CharField(max_length=300)
+    created_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(
         User,
         related_name='created_comments',

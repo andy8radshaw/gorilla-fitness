@@ -23,7 +23,10 @@ class EventListView(APIView):
 
     # * Create a new event
     def post(self, request):
+        if not request.user.is_admin:
+            raise PermissionDenied()
         request.data['owner'] = request.user.id
+        request.data['attendees'] = [request.user.id]
         new_event = EventSerializer(data=request.data)
         if new_event.is_valid():
             new_event.save()

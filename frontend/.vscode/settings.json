@@ -1,0 +1,9 @@
+{
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#a55e01",
+    "titleBar.activeBackground": "#a55e01",
+    "titleBar.inactiveBackground": "#a55e01",
+  },
+  "window.title": "FRONT-End GORILLA FITNESS",
+}

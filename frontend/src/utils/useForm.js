@@ -13,6 +13,8 @@ function useForm(intialFormState = {}, submitFn, submitParams = null, onSubmitSu
     setFormErrors(updatedErrors)
   }
 
+
+
   const handleSubmit = async event => {
     event.preventDefault()
 
@@ -23,8 +25,16 @@ function useForm(intialFormState = {}, submitFn, submitParams = null, onSubmitSu
       setFormErrors(err.response.data.errors)
     }
   }
+
+  const handleAddImage = event => {
+    event.preventDefault()
+    const newFormData = { ...formData, images: [...formData.images, ''] }
+    const newFormErrors = { ...formErrors, [event.target.name]: '' }
+    setFormData({ newFormData })
+    setFormErrors({ newFormErrors })
+  }
   
-  return { formData, handleChange, setFormData, formErrors, setFormErrors, handleSubmit }
+  return { formData, handleChange, handleAddImage, setFormData, formErrors, setFormErrors, handleSubmit }
 }
 
 export default useForm

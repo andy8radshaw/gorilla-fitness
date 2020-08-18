@@ -1,8 +1,9 @@
 import React from 'react'
-import { faEnvelope, faUser, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faUser, faLock, faCameraRetro, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { useHistory } from 'react-router-dom'
 
 import { registerUser } from '../../lib/api'
+import { setToken } from '../../lib/auth'
 import useForm from '../../utils/useForm'
 import PageContainer from '../common/PageContainer'
 import Form from '../common/form/Form'
@@ -11,13 +12,13 @@ import FormErrorMessage from '../common/form/FormErrorMessage'
 import FormLink from '../common/form/FormLink'
 import FormButton from '../common/form/FormButton'
 import FormTextarea from '../common/form/FormTextarea'
-import FormImageUpload from '../common/form/FormImageUpload'
 
 function Register() {
   const history = useHistory()
 
-  const onSubmitSuccess = () => {
-    history.push('/login')
+  const onSubmitSuccess = response => {
+    setToken(response.data.token)
+    history.push('/')
   }
 
   const { formData, handleChange, formErrors, handleSubmit } = useForm({
@@ -28,9 +29,10 @@ function Register() {
     first_name: '',
     last_name: '',
     bio: '',
-    profile_pic: ''
+    profile_image: ''
 
   }, registerUser, null, onSubmitSuccess)
+
 
   return (
     <>
@@ -41,7 +43,7 @@ function Register() {
             label="Username"
             placeholder="Username"
             icon={faUser}
-            value={formData.username}
+            value={formData.username || ''}
             error={formErrors.username}
             onChange={handleChange}
           />
@@ -52,7 +54,7 @@ function Register() {
             label="Email"
             placeholder="Email"
             icon={faEnvelope}
-            value={formData.email}
+            value={formData.email || ''}
             error={formErrors.email}
             onChange={handleChange}
           />
@@ -62,7 +64,7 @@ function Register() {
             label="Password"
             placeholder="Password"
             icon={faLock}
-            value={formData.password}
+            value={formData.password || ''}
             error={formErrors.password}
             onChange={handleChange}
             type="password"
@@ -73,7 +75,7 @@ function Register() {
             label="Password Confirmation"
             placeholder="Password Confirmation"
             icon={faLock}
-            value={formData.password_confirmation}
+            value={formData.password_confirmation || ''}
             error={formErrors.password_confirmation}
             onChange={handleChange}
             type="password"
@@ -83,8 +85,8 @@ function Register() {
             name="first_name"
             label="First Name"
             placeholder="First Name"
-            icon={faUser}
-            value={formData.first_name}
+            icon={faInfoCircle}
+            value={formData.first_name || ''}
             error={formErrors.first_name}
             onChange={handleChange}
           />
@@ -93,8 +95,8 @@ function Register() {
             name="last_name"
             label="Last Name"
             placeholder="Last Name"
-            icon={faUser}
-            value={formData.last_name}
+            icon={faInfoCircle}
+            value={formData.last_name || ''}
             error={formErrors.last_name}
             onChange={handleChange}
           />
@@ -104,17 +106,20 @@ function Register() {
             label="About you"
             placeholder="Tell us about yourself..."
             onChange={handleChange}
-            value={formData.bio}
+            value={formData.bio || ''}
             error={formErrors.bio}
           />
           {formErrors.bio && <FormErrorMessage error={formErrors.bio} />}
-          <FormImageUpload
+          <FormInput
+            name="profile_image"
             label="Profile Pic"
+            placeholder="URL for your profile picture"
+            icon={faCameraRetro}
+            value={formData.profile_image || ''}
+            error={formErrors.profile_image}
             onChange={handleChange}
-            name="profile_pic"
-            value={formData.profile_pic}
-            error={formErrors.profile_pic}
           />
+          {formErrors.profile_image && <FormErrorMessage error={formErrors.profile_image} />}
           <FormButton buttonText="Sign me up" />
           <FormLink to="/login" text="Already have an account?" />
         </Form>

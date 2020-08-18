@@ -4,7 +4,14 @@ import axios from 'axios'
 const uploadUrl = process.env.REACT_APP_IMAGE_UPLOAD_URL
 const uploadPreset = process.env.REACT_APP_IMAGE_UPLOAD_PRESET
 
-function FormImageUpload({ label }) {
+function FormImageUpload({
+  name,
+  label,
+  value,
+  error,
+  type = 'file'
+
+}) {
   const [image, setImage] = useState(null)
 
   const handleUpload = async event => {
@@ -22,18 +29,19 @@ function FormImageUpload({ label }) {
   return (
     <div>
       {image ?
-      
         <div>
-          <img className="image is-64x64" src={image} alt="selected"/>
+          <img className="image is-64x64" src={image} alt="selected" />
         </div>
-          
+
         :
         <>
           <label className="label">{label}</label>
           <input
-            className="input"
-            type="file"
+            className={`input ${error ? 'is-danger' : ''}`}
+            name={name}
             onChange={handleUpload}
+            value={value}
+            type={type}
           />
         </>
       }

@@ -1,13 +1,13 @@
 import axios from 'axios'
-import { getToken } from './auth'
+// import { getToken } from './auth'
 
 const baseUrl = '/api'
 
-const withHeaders = () => {
-  return {
-    headers: { Authorization: `Bearer ${getToken()}` }
-  }
-}
+// const withHeaders = () => {
+//   return {
+//     headers: { Authorization: `Bearer ${getToken()}` }
+//   }
+// }
 
 //* USER REQUESTS
 

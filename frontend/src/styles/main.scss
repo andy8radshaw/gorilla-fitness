@@ -1,8 +1,28 @@
-$purple: #8A4D76;
-$pink: #FA7C91;
-$brown: #757763;
-$beige-light: #D0D1CD;
-$beige-lighter: #EFF0EB;
+@import url("https://fonts.googleapis.com/css2?family=Graduate&display=swap");
 
-$primary: $pink;
+
+// Brand Colours
+$yellow: #FFC200;
+$purple: #8A4D76;
+$flame: #DE541E;
+$dark-olive: #3f3f37;
+$olive-drab: #494331;
+
+
+// global variables
+$primary: $yellow;
+$info: $olive-drab;
+$dark: $dark-olive;
+$link: $purple;
+$danger: $flame;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+// updating Bulma component variables
+$family-sans-serif: 'Graduate', cursive;
+$body-background-color: $primary;
+$control-border-width: 2px;
+$input-border-color: $dark;
+$input-shadow: none;
+
 @import '~bulma/bulma.sass';

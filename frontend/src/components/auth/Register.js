@@ -39,15 +39,15 @@ function Register() {
       <PageContainer>
         <Form onSubmit={handleSubmit}>
           <FormInput
+            error={formErrors.username}
             name="username"
             label="Username"
             placeholder="Username"
             icon={faUser}
             value={formData.username || ''}
-            error={formErrors.username}
             onChange={handleChange}
           />
-          {formErrors.username && <FormErrorMessage error={formErrors.username} />}
+          {/* {formErrors.username && <FormErrorMessage error={formErrors.username} />} */}
 
           <FormInput
             name="email"
@@ -58,7 +58,7 @@ function Register() {
             error={formErrors.email}
             onChange={handleChange}
           />
-          {formErrors.email && <FormErrorMessage error={formErrors.email} />}
+          {/* {formErrors.email && <FormErrorMessage error={formErrors.email} />} */}
           <FormInput
             name="password"
             label="Password"
@@ -69,7 +69,7 @@ function Register() {
             onChange={handleChange}
             type="password"
           />
-          {formErrors.password && <FormErrorMessage error={formErrors.password} />}
+          {/* {formErrors.password && <FormErrorMessage error={formErrors.password} />} */}
           <FormInput
             name="password_confirmation"
             label="Password Confirmation"
@@ -80,7 +80,7 @@ function Register() {
             onChange={handleChange}
             type="password"
           />
-          {formErrors.passwordConfirmation && <FormErrorMessage error={formErrors.passwordConfirmation} />}
+          {/* {formErrors.passwordConfirmation && <FormErrorMessage error={formErrors.passwordConfirmation} />} */}
           <FormInput
             name="first_name"
             label="First Name"
@@ -90,7 +90,7 @@ function Register() {
             error={formErrors.first_name}
             onChange={handleChange}
           />
-          {formErrors.first_name && <FormErrorMessage error={formErrors.first_name} />}
+          {/* {formErrors.first_name && <FormErrorMessage error={formErrors.first_name} />} */}
           <FormInput
             name="last_name"
             label="Last Name"
@@ -100,16 +100,16 @@ function Register() {
             error={formErrors.last_name}
             onChange={handleChange}
           />
-          {formErrors.last_name && <FormErrorMessage error={formErrors.last_name} />}
-          <FormTextarea
+          {/* {formErrors.last_name && <FormErrorMessage error={formErrors.last_name} />} */}
+          {/* <FormTextarea
             name="bio"
             label="About you"
             placeholder="Tell us about yourself..."
             onChange={handleChange}
             value={formData.bio || ''}
             error={formErrors.bio}
-          />
-          {formErrors.bio && <FormErrorMessage error={formErrors.bio} />}
+          /> */}
+          {/* {formErrors.bio && <FormErrorMessage error={formErrors.bio} />} */}
           <FormInput
             name="profile_image"
             label="Profile Pic"
@@ -119,7 +119,7 @@ function Register() {
             error={formErrors.profile_image}
             onChange={handleChange}
           />
-          {formErrors.profile_image && <FormErrorMessage error={formErrors.profile_image} />}
+          {/* {formErrors.profile_image && <FormErrorMessage error={formErrors.profile_image} />} */}
           <FormButton buttonText="Sign me up" />
           <FormLink to="/login" text="Already have an account?" />
         </Form>

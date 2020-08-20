@@ -4,6 +4,7 @@
 // Brand Colours
 $yellow: #FFC200;
 $purple: #8A4D76;
+$light-purple: #9A8C98;
 $flame: #DE541E;
 $dark-olive: #3f3f37;
 $olive-drab: #494331;
@@ -13,7 +14,8 @@ $olive-drab: #494331;
 $primary: $yellow;
 $info: $olive-drab;
 $dark: $dark-olive;
-$link: $purple;
+$link: $light-purple;
+$link-hover: $purple;
 $danger: $flame;
 $widescreen-enabled: false;
 $fullhd-enabled: false;

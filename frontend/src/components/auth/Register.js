@@ -8,10 +8,10 @@ import useForm from '../../utils/useForm'
 import PageContainer from '../common/PageContainer'
 import Form from '../common/form/Form'
 import FormInput from '../common/form/FormInput'
-import FormErrorMessage from '../common/form/FormErrorMessage'
+// import FormErrorMessage from '../common/form/FormErrorMessage'
 import FormLink from '../common/form/FormLink'
 import FormButton from '../common/form/FormButton'
-import FormTextarea from '../common/form/FormTextarea'
+// import FormTextarea from '../common/form/FormTextarea'
 
 function Register() {
   const history = useHistory()

@@ -1,10 +1,20 @@
 import React from 'react'
 import { Link, withRouter, useHistory } from 'react-router-dom'
 
-import { logout } from '../../lib/auth'
+import { logout, isAuthenticated } from '../../lib/auth'
 
 function Navbar() {
   const history = useHistory()
+
+  const [burgerIsOpen, setBurgerIsOpen] = React.useState(false)
+
+  const handleBurgerClose = () => {
+    setBurgerIsOpen(false)
+  }
+  
+  const handleBurger = () => {
+    setBurgerIsOpen(!burgerIsOpen)
+  }
 
   const handleLogout = () => {
     logout()
@@ -14,21 +24,14 @@ function Navbar() {
   return (
     <nav className="navbar is-info">
       <div className="navbar-brand">
-        <Link className="navbar-item" to="/">
+        <Link onClick={handleBurgerClose} className="navbar-item" to="/">
           Home
         </Link>
-        <Link className="navbar-item" to="/login">
-          Log In
-        </Link>
-        <Link className="navbar-item" to="/register">
-          Register
-        </Link>
-        <a className="navbar-item" href="/" onClick={handleLogout}>
-          Logout
-        </a>
+
         <a
+          onClick={handleBurger}
           role="button"
-          className="navbar-burger"
+          className={`navbar-burger ${burgerIsOpen ? 'is-active' : ''}`}
           aria-label="menu"
           aria-expanded="false"
         >
@@ -36,6 +39,28 @@ function Navbar() {
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
+      </div>
+
+      <div className={`navbar-menu ${burgerIsOpen ? 'is-active' : ''}`}>
+        <div className="navbar-end">
+          {!isAuthenticated() && (
+            <Link onClick={handleBurgerClose} className="navbar-item" to="/login">
+              Log In
+            </Link>
+          )}
+
+          {!isAuthenticated() && (
+            <Link onClick={handleBurgerClose} className="navbar-item" to="/register">
+              Register
+            </Link>
+          )}
+
+          {isAuthenticated() && (
+            <a onClick={handleBurgerClose, handleLogout} className="navbar-item" href="/" >
+              Logout
+            </a>
+          )}
+        </div>
       </div>
     </nav>
   )

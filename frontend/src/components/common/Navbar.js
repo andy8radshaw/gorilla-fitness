@@ -22,7 +22,7 @@ function Navbar() {
   }
 
   return (
-    <nav className="navbar is-info">
+    <nav className="navbar is-dark">
       <div className="navbar-brand">
         <Link onClick={handleBurgerClose} className="navbar-item" to="/">
           Home

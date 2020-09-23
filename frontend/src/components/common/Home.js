@@ -6,7 +6,7 @@ function Home() {
     <section className='hero is-primary is-fullheight-with-navbar'>
       <div className='hero-body'>
         <div className='container'>
-          <img src="../../src/assets/gorilla-logo-2.png" alt="Gorilla logo" />
+          <img src="https://i.imgur.com/PVzq2iY.png?1" alt="gorilla fitness logo"/>
         </div>
       </div>
     </section>

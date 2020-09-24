@@ -20,7 +20,7 @@ class RegisterView(APIView):
             dt = datetime.now() + timedelta(days=7)
             token = jwt.encode({
                 'sub': created_user.data['id'],
-                'exp': int(dt.strftime('%s'))
+                'exp': int(dt.strftime('%s'))  
             }, settings.SECRET_KEY)
             return Response({'token': token, 'message': 'Registration successful'}, status=status.HTTP_201_CREATED)
         return Response(created_user.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)

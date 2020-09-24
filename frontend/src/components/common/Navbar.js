@@ -11,7 +11,7 @@ function Navbar() {
   const handleBurgerClose = () => {
     setBurgerIsOpen(false)
   }
-  
+
   const handleBurger = () => {
     setBurgerIsOpen(!burgerIsOpen)
   }
@@ -43,20 +43,53 @@ function Navbar() {
 
       <div className={`navbar-menu ${burgerIsOpen ? 'is-active' : ''}`}>
         <div className="navbar-end">
+
+          {isAuthenticated() && (
+            <Link
+              onClick={handleBurgerClose}
+              className="navbar-item"
+              to="/groups"
+            >
+              Join a Group
+            </Link>
+          )}
+
+          {isAuthenticated() && (
+            <Link
+              onClick={handleBurgerClose}
+              className="navbar-item"
+              to="/events"
+            >
+              Upcoming Events
+            </Link>
+          )}
+
           {!isAuthenticated() && (
-            <Link onClick={handleBurgerClose} className="navbar-item" to="/login">
+            <Link
+              onClick={handleBurgerClose}
+              className="navbar-item"
+              to="/login"
+            >
               Log In
             </Link>
           )}
 
           {!isAuthenticated() && (
-            <Link onClick={handleBurgerClose} className="navbar-item" to="/register">
+            <Link
+              onClick={handleBurgerClose}
+              className="navbar-item"
+              to="/register"
+            >
               Register
             </Link>
           )}
 
           {isAuthenticated() && (
-            <a onClick={handleBurgerClose, handleLogout} className="navbar-item" href="/" >
+            <a
+              onClick={(handleBurgerClose, handleLogout)}
+              className="navbar-item"
+              href="/"
+            >
               Logout
             </a>
           )}
